@@ -66,4 +66,14 @@ interface ConfigInterface
      * @return $this
      */
     public function setApiToken($apiVersion);
+
+    /** 
+     * Sets the property to log or not the requests
+     */
+    public function setLogRequests($logRequests);
+
+    /** 
+     * Gets the property to log or not the requests
+     */
+    public function getLogRequests();
 }

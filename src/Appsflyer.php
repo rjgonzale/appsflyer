@@ -52,9 +52,9 @@ class Appsflyer
      * @param  string  $apiToken
      * @return void
      */
-    public function __construct($devKey = null, $apiToken = null)
+    public function __construct($devKey = null, $apiToken = null, $logRequests = false)
     {
-        $this->config = new Config(self::VERSION, $devKey, $apiToken);
+        $this->config = new Config(self::VERSION, $devKey, $apiToken, $logRequests);
     }
 
     /**
@@ -62,11 +62,12 @@ class Appsflyer
      *
      * @param  string  $devKey
      * @param  string  $apiToken
+     * @param bool $logRequests
      * @return \Jlorente\Appsflyer\Appsflyer
      */
-    public static function make($devKey = null, $apiToken = null)
+    public static function make($devKey = null, $apiToken = null, $logRequests = false)
     {
-        return new static($devKey, $apiToken);
+        return new static($devKey, $apiToken, $logRequests);
     }
 
     /**
@@ -118,9 +119,9 @@ class Appsflyer
      * @param  string  $devKey
      * @return $this
      */
-    public function setApiKey($devKey)
+    public function setDevKey($devKey)
     {
-        $this->config->setApiKey($devKey);
+        $this->config->setDevKey($devKey);
 
         return $this;
     }

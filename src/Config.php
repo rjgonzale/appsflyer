@@ -51,6 +51,13 @@ class Config implements ConfigInterface
     protected $accountId;
 
     /**
+     * Define if we log requests or not
+     * 
+     * @var bool
+     */
+    protected $logRequests;
+
+    /**
      * Constructor.
      *
      * @param  string  $version
@@ -59,7 +66,7 @@ class Config implements ConfigInterface
      * @return void
      * @throws \RuntimeException
      */
-    public function __construct($version, $devKey, $apiToken)
+    public function __construct($version, $devKey, $apiToken, $logRequests = false)
     {
         $this->setVersion($version);
 
@@ -74,6 +81,8 @@ class Config implements ConfigInterface
         if (!$this->devKey) {
             throw new \RuntimeException('The Appsflyer dev_key is not defined!');
         }
+
+        $this->setLogRequests($logRequests);
     }
 
     /**
@@ -130,4 +139,21 @@ class Config implements ConfigInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getLogRequests()
+    {
+        return $this->logRequests;   
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setLogRequests($logRequests)
+    {
+        $this->logRequests = $logRequests;
+
+        return $this;
+    }
 }

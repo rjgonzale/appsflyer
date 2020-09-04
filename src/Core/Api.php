@@ -33,6 +33,10 @@ use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\TransferException;
 use GuzzleHttp\RequestOptions;
 
+use GuzzleLogMiddleware\LogMiddleware;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+
 abstract class Api implements ApiInterface
 {
 
@@ -197,7 +201,13 @@ abstract class Api implements ApiInterface
                     return (int) pow(2, $retries) * 1000;
                 }));
 
+        if ($this->config->getLogRequests()) {
+            $logger = new Logger('stderr');
+            $logger->pushHandler(new StreamHandler('php://stderr'));
+
+            $stack->push(new LogMiddleware($logger));
+        }
+
         return $stack;
     }
-
 }
