@@ -190,7 +190,7 @@ abstract class Api implements ApiInterface
         $stack->push(Middleware::mapRequest(function (RequestInterface $request) {
                     $config = $this->config;
 
-                    $request = $request->withHeader('authentication', $config->getDevKey());
+                    $request = $request->withHeader('Authentication', $config->getDevKey());
 
                     return $request;
                 }));
